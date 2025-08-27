@@ -1,12 +1,12 @@
-const adminUsername = "admin123"; // your preferred username
-const adminPassword = "1234"; // your secure password
+const adminUsername = "admin"; // your preferred username
+const adminPassword = "Wonderland@*1023"; // your secure password
 
 const loginAdmin = (req, res) => {
     const { username, password } = req.body;
     console.log("Received login data:", username, password);
 
-    const adminUsername = "admin123";
-    const adminPassword = "1234";
+    const adminUsername = "admin";
+    const adminPassword = "Wonderland@*1023";
 
     if (username === adminUsername && password === adminPassword) {
         console.log("Admin login successful");
