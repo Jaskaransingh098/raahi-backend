@@ -1,7 +1,6 @@
 const Trek = require('../models/Treks');
 
-// @desc    Get all treks
-// @route   GET /api/treks
+
 exports.getAllTreks = async (req, res) => {
     try {
         const treks = await Trek.find().sort({ createdAt: -1 });
@@ -11,8 +10,6 @@ exports.getAllTreks = async (req, res) => {
     }
 };
 
-// @desc    Get a single trek by ID
-// @route   GET /api/treks/:id
 exports.getTrekById = async (req, res) => {
     try {
         const trek = await Trek.findById(req.params.id);
@@ -24,8 +21,6 @@ exports.getTrekById = async (req, res) => {
     }
 };
 
-// @desc    Create a new trek
-// @route   POST /api/treks
 exports.createTrek = async (req, res) => {
     try {
         const newTrek = new Trek(req.body);
@@ -36,8 +31,6 @@ exports.createTrek = async (req, res) => {
     }
 };
 
-// @desc    Update a trek
-// @route   PUT /api/treks/:id
 exports.updateTrek = async (req, res) => {
     try {
         const updatedTrek = await Trek.findByIdAndUpdate(req.params.id, req.body, {
@@ -52,8 +45,6 @@ exports.updateTrek = async (req, res) => {
     }
 };
 
-// @desc    Delete a trek
-// @route   DELETE /api/treks/:id
 exports.deleteTrek = async (req, res) => {
     try {
         const deletedTrek = await Trek.findByIdAndDelete(req.params.id);

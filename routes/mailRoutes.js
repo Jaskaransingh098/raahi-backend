@@ -78,7 +78,7 @@ router.post("/customise", async (req, res) => {
 
 // 3. BookNow
 router.post("/booknow", async (req, res) => {
-  const { name, email, message, tourTitle } = req.body;
+  const { name, email, message, tourTitle, batchName, batchStartDate, batchEndDate } = req.body;
 
   try {
     await transporter.sendMail({
@@ -90,6 +90,12 @@ router.post("/booknow", async (req, res) => {
         <p><b>Name:</b> ${name}</p>
         <p><b>Email:</b> ${email}</p>
         <p><b>Adventure:</b> ${tourTitle}</p>
+         ${
+          batchName
+            ? `<p><b>Selected Batch:</b> ${batchName}</p>
+               <p><b>Batch Dates:</b> ${new Date(batchStartDate).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })} - ${new Date(batchEndDate).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}</p>`
+            : ""
+        }
         <p><b>Message:</b><br/>${message}</p>
       `,
     });

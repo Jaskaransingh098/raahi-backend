@@ -1,5 +1,5 @@
-const adminUsername = "admin"; // your preferred username
-const adminPassword = "Wonderland@*1023"; // your secure password
+const adminUsername = "admin";
+const adminPassword = "Wonderland@*1023";
 
 const loginAdmin = (req, res) => {
     const { username, password } = req.body;
