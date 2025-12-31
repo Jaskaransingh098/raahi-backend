@@ -199,7 +199,7 @@ exports.createTour = async (req, res) => {
             duration,
             price: Number(price),
             tags: parsedTags,
-            image: `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`,
+            image: `/uploads/${req.file.filename}`,
             integralFaqs: parseFaqs(req.body.integralFaqs),
             infoFaqs: parseFaqs(req.body.infoFaqs),
             mainFaqs: parseFaqs(req.body.mainFaqs),
@@ -266,8 +266,12 @@ exports.updateTour = async (req, res) => {
 
         // Handle image file
         if (req.file) {
-            updateData.image = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+            updateData.image = `/uploads/${req.file.filename}`;
+        } else if (updateData.image && updateData.image.startsWith("http")) {
+            // normalize old absolute URLs
+            updateData.image = updateData.image.replace(/^https?:\/\/[^/]+/, "");
         }
+
 
         const updatedTour = await Tour.findByIdAndUpdate(req.params.id, updateData, { new: true });
 
