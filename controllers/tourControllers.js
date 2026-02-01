@@ -92,48 +92,6 @@ exports.getTourById = async (req, res) => {
         res.status(500).json({ message: 'Failed to fetch tour', error });
     }
 };
-// exports.createTour = async (req, res) => {
-//     try {
-
-//         const { type, title, discount, description, category, location, price, duration, tags } = req.body;
-
-//         // Validate required fields (type is optional for user, but admin can set it)
-//         if (!title || !description || !category || !location || !duration || !price) {
-//             return res.status(400).json({ message: "All fields except type and tags are required" });
-//         }
-
-//         if (!req.file) {
-//             return res.status(400).json({ message: "Image is required" });
-//         }
-
-//         const parsedTags = tags
-//             ? typeof tags === "string"
-//                 ? tags.split(",").map(tag => tag.trim())
-//                 : Array.isArray(tags)
-//                     ? tags
-//                     : []
-//             : [];
-
-//         const newTour = new Tour({
-//             type,
-//             discount: discount !== undefined && discount !== "" ? Number(discount) : null,
-//             title,
-//             description,
-//             category,
-//             location,
-//             duration,
-//             price: Number(price),
-//             tags: parsedTags,
-//             image: `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`,
-//         });
-
-//         const savedTour = await newTour.save();
-//         res.status(201).json(savedTour);
-//     } catch (error) {
-//         console.error("Create tour error:", error);
-//         res.status(500).json({ message: 'Failed to create tour', error: error.message });
-//     }
-// };
 
 exports.createTour = async (req, res) => {
     try {
@@ -203,8 +161,8 @@ exports.createTour = async (req, res) => {
             integralFaqs: parseFaqs(req.body.integralFaqs),
             infoFaqs: parseFaqs(req.body.infoFaqs),
             mainFaqs: parseFaqs(req.body.mainFaqs),
-            included: parseArrayField(req.body.included),  // ✅
-            excluded: parseArrayField(req.body.excluded),  // ✅
+            included: parseArrayField(req.body.included), 
+            excluded: parseArrayField(req.body.excluded),  
             batches: parseBatches(req.body.batches),
             costPackages: parseCostPackages(req.body.costPackages),
             benefitHighlights: parseArrayField(req.body.benefitHighlights),
@@ -283,42 +241,6 @@ exports.updateTour = async (req, res) => {
         res.status(500).json({ message: "Failed to update tour", error: error.message });
     }
 };
-
-
-// exports.updateTour = async (req, res) => {
-//     try {
-//         const updateData = { ...req.body };
-
-
-//         if (updateData.price) updateData.price = Number(updateData.price);
-//         if (updateData.discount !== undefined) {
-//             updateData.discount = updateData.discount === "" ? null : Number(updateData.discount);
-//         }
-
-//         if (updateData.tags) {
-//             if (typeof updateData.tags === "string") {
-//                 updateData.tags = updateData.tags.split(",").map(tag => tag.trim());
-//             }
-//         }
-
-
-//         if (req.file) {
-//             updateData.image = `/uploads/${req.file.filename}`;
-//         }
-
-//         const updatedTour = await Tour.findByIdAndUpdate(
-//             req.params.id,
-//             updateData,
-//             { new: true }
-//         );
-
-//         if (!updatedTour) return res.status(404).json({ message: 'Tour not found' });
-//         res.status(200).json(updatedTour);
-//     } catch (error) {
-//         console.error("Update tour error:", error);
-//         res.status(500).json({ message: 'Failed to update tour', error: error.message });
-//     }
-// };
 
 exports.deleteTour = async (req, res) => {
     try {

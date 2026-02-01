@@ -17,8 +17,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-console.log("Serving uploads from:", path.join(__dirname, "uploads"));
+app.use("/uploads", express.static("/var/www/uploads"));
+console.log("Serving uploads from: /var/www/uploads");
 app.use('/api/tours', tourRoutes);
 app.use('/api/treks', trekRoutes);
 app.use('/api/admin', adminRoutes);
@@ -26,7 +26,6 @@ app.use("/api/mail", mailRoutes);
 
 
 console.log("MAIL_USER:", process.env.MAIL_USER);
-// Do not log MAIL_PASS for security
 
 
 mongoose.connect(process.env.MONGO_URI)

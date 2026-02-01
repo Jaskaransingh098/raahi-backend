@@ -8,7 +8,6 @@ const {
     deleteTrek,
 } = require('../controllers/trekController');
 
-// Base route: /api/treks
 
 // GET all treks
 router.get('/', getAllTreks);
